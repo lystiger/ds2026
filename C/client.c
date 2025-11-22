@@ -2,6 +2,8 @@
 #include <unistd.h>
 #include "headers/socket.h"
 #include "headers/connect.h"
+#include "headers/read.h"
+#include "headers/write.h"
 #include <sys/socket.h>
 #include <string.h>
 
@@ -45,7 +47,21 @@ int main(){
     } else {
         perror("Connect failed u idiot");
     }    
-        close(fd);
+
+    // Send message to server
+    char *msg = "Hello from the void";
+    mon_write(fd, msg, strlen(msg));
+
+    // Receive the message
+    char buffer[1024];
+    ssize_t n = mon_read(fd, buffer, sizeof(buffer) - 1);
+
+    if (n > 0){
+        buffer[n] = "\0";
+        printf("Server is telling: %s\n", buffer);
+    }
+
+          close(fd);
     return 0;
 }
 
