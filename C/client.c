@@ -3,6 +3,7 @@
 #include "headers/socket.h"
 #include "headers/connect.h"
 #include "headers/read.h"
+#include "headers/close.h"
 #include "headers/write.h"
 #include <sys/socket.h>
 #include <string.h>
@@ -57,11 +58,11 @@ int main(){
     ssize_t n = mon_read(fd, buffer, sizeof(buffer) - 1);
 
     if (n > 0){
-        buffer[n] = "\0";
+        buffer[n] = '\0';
         printf("Server is telling: %s\n", buffer);
     }
 
-          close(fd);
+          mon_close(fd);
     return 0;
 }
 
