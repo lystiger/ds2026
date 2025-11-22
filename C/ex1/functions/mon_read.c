@@ -4,24 +4,23 @@
 #include "read.h"
 #include <errno.h>
 
-ssize_t mon_read(int fd, const void *buffer, size_t count){
-    size_t total = 0; // total bytes successfully read 
-    const char*ptr = buffer;
+ssize_t mon_read(int fd, void *buffer, size_t count){
+    ssize_t n;
+    // Loop to handle EINTR (interrupted system call)
+    do {
+        n = syscall(__NR_read, fd, buffer, count);
+    } while (n < 0 && errno == EINTR);
 
-    while(total < count){
-        ssize_t n = syscall(__NR_read, fd, ptr + total, count - total);
-        // ptr + total = point to the first bytes not yet read
-        // count - total = remaining bytes to read
-        if( n < 0){
-            if(errno == EINTR);//EINTR(interrupted by a signal)
-            continue;
-            perror("read syscall failed");
-            return -1;
-        } else if(n == 0){
-            // connection closed by peer
-            break;
-        }
-        total += n;
+    // If 'n' is still negative, an actual error occurred during the read syscall.
+    // We print the error and return 'n' (which will be -1).
+    // The caller is responsible for checking the return value of mon_read.
+    if (n < 0) {
+        perror("read syscall failed");
     }
-    return total;
+    // If 'n' is 0, it indicates that the peer has closed its connection (EOF).
+    // If 'n' is positive, it indicates the number of bytes successfully read.
+    // The caller is responsible for processing the received data,
+    // as mon_read now returns whatever data is available up to 'count',
+    // rather than waiting for 'count' bytes to be fully filled.
+    return n;
 }

@@ -3,6 +3,7 @@
 #include <string.h>
 #include <arpa/inet.h>
 #include <netinet/in.h>
+#include <sys/socket.h>
 
 //headers
 #include "socket.h"
@@ -18,6 +19,14 @@ int main() {
     int host = mon_socket(AF_INET, SOCK_STREAM, 0);
     if(host < 0){
         perror("Socket creation failed");
+        return 1;
+    }
+
+    // Allow reuse of local addresses
+    int yes = 1;
+    if (setsockopt(host, SOL_SOCKET, SO_REUSEADDR, &yes, sizeof(int)) == -1) {
+        perror("setsockopt");
+        mon_close(host);
         return 1;
     }
 

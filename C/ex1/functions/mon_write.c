@@ -12,12 +12,12 @@ ssize_t mon_write(int fd, const void *buffer, size_t count){
         ssize_t n = syscall(__NR_write, fd, ptr + total, count - total);
         // ptr + total = point to the first bytes not yet sent
         // count - total = remaining bytes to write
-        if( n < 0){
-            if(errno == EINTR);//EINTR(interrupted by a signal)
-            continue;
-        } else {
+        if (n < 0) {
+            if (errno == EINTR) { // Interrupted by a signal
+                continue; // Retry the syscall
+            }
             perror("write syscall failed");
-            return -1;
+            return -1; // An actual error occurred
         }
         total += n;
     }

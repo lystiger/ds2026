@@ -3,7 +3,7 @@
 
 #include <stdio.h>
 
-ssize_t read(int fd, void* buffer, size_t count);
+ssize_t mon_read(int fd, void* buffer, size_t count);
 // fd = file descriptor
 // buffer = u know it
 // count = maximum number of bytes readed

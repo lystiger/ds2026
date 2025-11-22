@@ -2,7 +2,7 @@
 #define WRITE_H
 #include <stdio.h>
 
-ssize_t write(int fd, const void* buffer, size_t count);
+ssize_t mon_write(int fd, const void* buffer, size_t count);
 // Problems:
 // +) Might not write all bytes since it is a must to loop all bytes are sent 
 // +) Return -1 or errno if bad things occur
