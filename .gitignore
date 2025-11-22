@@ -1,4 +1,7 @@
 C/test_socket
 C/ex1/client
 C/ex1/server
+Report/report.aux
+Report/report.log
+Report/report.tex
 .vscode/*
