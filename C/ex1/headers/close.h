@@ -1,6 +1,6 @@
 #ifndef CLOSE_H
 #define CLOSE_H
 
-int close(int fd);
+int mon_close(int fd);
 
 #endif

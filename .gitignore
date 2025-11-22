@@ -1,3 +1,4 @@
 C/test_socket
-C/client
+C/ex1/client
+C/ex1/server
 .vscode/*

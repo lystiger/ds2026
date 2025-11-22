@@ -5,13 +5,14 @@
 #include <netinet/in.h>
 
 //headers
-#include "headers/socket.h"
-#include "headers/read.h"
-#include "headers/write.h"
-#include "headers/connect.h" 
-#include "headers/listen.h"  
-#include "headers/accept.h"  
-#include "headers/close.h"   
+#include "socket.h"
+#include "read.h"
+#include "write.h"
+#include "connect.h" 
+#include "listen.h"  
+#include "accept.h"  
+#include "close.h"
+#include "bind.h"   
 
 int main() {
     int host = mon_socket(AF_INET, SOCK_STREAM, 0);

@@ -1,7 +1,7 @@
-#ifndef BIND_H
-#define BIND_H
+#ifndef ACCEPT_H
+#define ACCEPT_H
 #include <sys/socket.h>
 
-int accept(int sockfd, const struct sockaddr *addr, socklen_t addrlen);
+int mon_accept(int sockfd, struct sockaddr *addr, socklen_t *addrlen);
 
 #endif

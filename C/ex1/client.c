@@ -1,10 +1,10 @@
 #include <stdio.h>
 #include <unistd.h>
-#include "headers/socket.h"
-#include "headers/connect.h"
-#include "headers/read.h"
-#include "headers/close.h"
-#include "headers/write.h"
+#include "socket.h"
+#include "connect.h"
+#include "read.h"
+#include "close.h"
+#include "write.h"
 #include <sys/socket.h>
 #include <string.h>
 

@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <unistd.h>
 #include <sys/syscall.h>
-#include "headers/write.h"
+#include "write.h"
 #include <errno.h>
 
 ssize_t mon_write(int fd, const void *buffer, size_t count){
