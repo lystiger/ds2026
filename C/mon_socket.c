@@ -3,9 +3,9 @@
 #include <sys/syscall.h>
 #include <sys/types.h>
 #include <sys/socket.h>
-#include "socket.h"
+#include "headers/socket.h"
 
-int socket(int domain, int type, int protocol){
+int mon_socket(int domain, int type, int protocol){
     int fd = syscall(__NR_socket, domain, type, protocol); //fd = file descriptors
     //__NR_socket: Since i have a petit brain, i will explain within my understanding.
     //             In linux every syscall has an unique number and __NR_socket is the
