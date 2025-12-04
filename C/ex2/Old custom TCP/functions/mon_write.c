@@ -1,0 +1,25 @@
+#include <stdio.h>
+#include <unistd.h>
+#include <sys/syscall.h>
+#include "write.h"
+#include <errno.h>
+
+ssize_t mon_write(int fd, const void *buffer, size_t count){
+    size_t total = 0; // total bytes successfully written 
+    const char*ptr = buffer;
+
+    while(total < count){
+        ssize_t n = syscall(__NR_write, fd, ptr + total, count - total);
+        // ptr + total = point to the first bytes not yet sent
+        // count - total = remaining bytes to write
+        if (n < 0) {
+            if (errno == EINTR) { // Interrupted by a signal
+                continue; // Retry the syscall
+            }
+            perror("write syscall failed");
+            return -1; // An actual error occurred
+        }
+        total += n;
+    }
+    return total;
+}
