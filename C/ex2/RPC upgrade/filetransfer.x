@@ -1,5 +1,4 @@
 /*filetransfer.x*/
-// This is an RPC interface definition file that describes its data types, structures
 
 const MAXFNAME = 256;
 const MAXCHUNK = 4096;
