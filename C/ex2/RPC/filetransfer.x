@@ -1,24 +1,26 @@
-/*filetransfer.x*/
-
 const MAXFNAME = 256;
 const MAXCHUNK = 4096;
 
 typedef string filename<MAXFNAME>;
 
-struct file_chunk {
+struct upload_chunk {
     filename name;
     opaque data<MAXCHUNK>;
+    int offset;
     bool is_last;
 };
 
-typedef file_chunk upload_arg;
-
+typedef upload_chunk upload_arg;
 typedef int upload_res;
 
-typedef filename download_arg;
+struct download_arg {
+    filename name;
+    int offset;
+};
 
 struct chunk_reply {
     opaque data<MAXCHUNK>;
+    int data_len;
     bool is_last;
 };
 
