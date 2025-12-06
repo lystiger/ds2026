@@ -13,10 +13,11 @@ struct upload_chunk {
 typedef upload_chunk upload_arg;
 typedef int upload_res;
 
-struct download_arg {
+struct download_arg_s {
     filename name;
     int offset;
 };
+typedef struct download_arg_s download_arg;
 
 struct chunk_reply {
     opaque data<MAXCHUNK>;
