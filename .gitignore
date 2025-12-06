@@ -3,10 +3,8 @@ C/ex1/client
 C/ex1/server
 C/ex2/RPC/*.o
 C/ex2/RPC/*.filetransfer
-Report/report1.aux
-Report/report1.log
-Report/report1.tex
-Report/report2.aux
-Report/report2.log
-Report/report2.tex
+Report/*.aux
+Report/*.log
+Report/*.tex
+explanation.md
 .vscode/*
